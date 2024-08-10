@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ClinicWave
 
-## Getting Started
+**ClinicWave** is a healthcare patient management application that simplifies patient registration, appointment scheduling, and medical records management for clinics and healthcare providers. Built with modern web technologies, ClinicWave ensures seamless management of patient data, appointments, and communications through integrated SMS notifications.
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ClinicWave is designed to allow patients to easily register, book, and manage their appointments with doctors. It features a comprehensive set of administrative tools for scheduling, confirming, and canceling appointments. With built-in SMS notifications, the platform ensures timely communication between patients and healthcare providers. Developed using Next.js, this platform offers a robust and responsive solution for clinics of all sizes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If you're getting started and need assistance or face any bugs, join our active Discord community with over 34k+ members. It's a place where people help each other out.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+-   **Next.js**: React framework for server-side rendering and static site generation.
+-   **Appwrite**: Backend server for web, mobile, and flutter developers.
+-   **TypeScript**: A typed superset of JavaScript that enhances code quality and maintainability.
+-   **TailwindCSS**: Utility-first CSS framework for rapid UI development.
+-   **ShadCN**: A component library for building scalable and responsive UI.
+-   **Twilio**: A cloud communications platform for sending and receiving SMS notifications.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+-   **Register as a Patient**: Users can sign up and create a personal profile as a patient.
+-   **Book a New Appointment with Doctor**: Patients can schedule appointments with doctors at their convenience and can book multiple appointments.
+-   **Manage Appointments on Admin Side**: Administrators can efficiently view and handle all scheduled appointments.
+-   **Confirm/Schedule Appointment from Admin Side**: Admins can confirm and set appointment times to ensure they are properly scheduled.
+-   **Cancel Appointment from Admin Side**: Administrators have the ability to cancel any appointment as needed.
+-   **Send SMS on Appointment Confirmation**: Patients receive SMS notifications to confirm their appointment details.
+-   **Complete Responsiveness**: The application works seamlessly on all device types and screen sizes.
+-   **File Upload Using Appwrite Storage**: Users can upload and store files securely within the app using Appwrite storage services.
+-   **Manage and Track Application Performance Using Sentry**: The application uses Sentry to monitor and track its performance and detect any errors.
+-   **...and many more, including code architecture and reusability**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the Repository**:
 
-## Deploy on Vercel
+    ```bash
+    git clone https://github.com/
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Navigate to the Project Directory**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```bash
+    cd clinicwave
+    ```
+
+3. **Install Dependencies**:
+
+    - If using `npm`:
+
+    ```bash
+    npm install
+    ```
+
+    - If using `yarn`:
+
+    ```bash
+    yarn install
+    ```
+
+4. **Run the Application**:
+    - For development:
+    ```bash
+    npm run dev
+    ```
+    - For production build:
+    ```bash
+    npm run build
+    ```
+
+## Usage
+
+-   **Patient Registration**: Use the "Register New Patient" button to access the registration form. Fill in the required details and submit.
+-   **Appointment Scheduling**: Navigate to the "Appointments" tab to view, schedule, or edit appointments. Use the calendar view to easily manage patient schedules.
+-   **Medical Records**: Access the "Medical Records" section to view, add, or update patient medical records. Use the search functionality for quick access.
+-   **SMS Notifications**: Configure SMS notifications in the "Settings" section to send automated reminders and notifications to patients.
+
+## Configuration
+
+-   **Database Setup**: Configure your preferred database in the `config/database.js` file. The platform supports popular databases like MySQL, PostgreSQL, and MongoDB.
+-   **SMS Service Integration**: Integrate your SMS service provider in the `config/sms.js` file. Supported providers include Twilio, Nexmo, and others.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or support, please reach out to [ogurtsov.danylo@gmail.com](mailto:ogurtsov.danylo@gmail.com).
