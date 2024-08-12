@@ -11,11 +11,11 @@ const fontSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-    title: "ClinicWave - Streamlined Healthcare Management Platform",
+    title: "ClinicCare - Streamlined Healthcare Management Platform",
     description:
-        "ClinicWave is your all-in-one healthcare platform for effortless patient registration, appointment scheduling, and secure medical records management. Enhance your clinic's efficiency with integrated SMS notifications and user-friendly forms.",
+        "ClinicCare is your all-in-one healthcare platform for effortless patient registration, appointment scheduling, and secure medical records management. Enhance your clinic's efficiency with integrated SMS notifications and user-friendly forms.",
     keywords:
-        "ClinicWave, healthcare platform, patient registration, appointment scheduling, medical records, SMS notifications, healthcare management, clinic software, medical forms, patient portal",
+        "ClinicCare, healthcare platform, patient registration, appointment scheduling, medical records, SMS notifications, healthcare management, clinic software, medical forms, patient portal",
     authors: {
         name: "Danylo Ohurtsov",
         url: "https://www.linkedin.com/in/danylo-ohurtsov/",
@@ -35,12 +35,7 @@ export default function RootLayout({
                     fontSans.variable
                 )}
             >
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    enableSystem
-                    disableTransitionOnChange
-                >
+                <ThemeProvider attribute="class" defaultTheme="dark">
                     {children}
                 </ThemeProvider>
             </body>
