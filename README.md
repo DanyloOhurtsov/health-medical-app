@@ -1,10 +1,10 @@
-# ClinicWave
+# ClinicCare
 
-**ClinicWave** is a healthcare patient management application that simplifies patient registration, appointment scheduling, and medical records management for clinics and healthcare providers. Built with modern web technologies, ClinicWave ensures seamless management of patient data, appointments, and communications through integrated SMS notifications.
+**ClinicCare** is a healthcare patient management application that simplifies patient registration, appointment scheduling, and medical records management for clinics and healthcare providers. Built with modern web technologies, ClinicCare ensures seamless management of patient data, appointments, and communications through integrated SMS notifications.
 
 ## Introduction
 
-ClinicWave is designed to allow patients to easily register, book, and manage their appointments with doctors. It features a comprehensive set of administrative tools for scheduling, confirming, and canceling appointments. With built-in SMS notifications, the platform ensures timely communication between patients and healthcare providers. Developed using Next.js, this platform offers a robust and responsive solution for clinics of all sizes.
+ClinicCare is designed to allow patients to easily register, book, and manage their appointments with doctors. It features a comprehensive set of administrative tools for scheduling, confirming, and canceling appointments. With built-in SMS notifications, the platform ensures timely communication between patients and healthcare providers. Developed using Next.js, this platform offers a robust and responsive solution for clinics of all sizes.
 
 If you're getting started and need assistance or face any bugs, join our active Discord community with over 34k+ members. It's a place where people help each other out.
 
@@ -41,7 +41,7 @@ If you're getting started and need assistance or face any bugs, join our active 
 2. **Navigate to the Project Directory**:
 
     ```bash
-    cd clinicwave
+    cd ClinicCare
     ```
 
 3. **Install Dependencies**:
