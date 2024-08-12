@@ -27,15 +27,14 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            <div className=" w-1/2 bg-red-500">
-            <Image
-                src={"/assets/images/onboarding-img.png"}
-                alt="onboarding-image"
-                height={1000}
-                width={1000}
-                className="side-img max-w-[50%] h-full bg-green-300"
-            />
-
+            <div className="w-1/2 flex justify-start">
+                <Image
+                    src={"/assets/images/onboarding-img.png"}
+                    alt="onboarding-image"
+                    height={1000}
+                    width={1000}
+                    className="side-img w-fit h-full"
+                />
             </div>
         </div>
     );
