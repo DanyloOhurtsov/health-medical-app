@@ -34,7 +34,7 @@ const PatientForm = () => {
             const user = await createUser(userData);
 
             // Redirect to the next page
-            if (user) router.push(`/patient/${user.$id}/register`);
+            if (user) router.push(`/patients/${user.$id}/register`);
         } catch (error) {
             console.error(error);
         }
