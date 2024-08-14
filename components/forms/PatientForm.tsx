@@ -1,15 +1,15 @@
 "use client";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "./CustomFormField";
 import { FormFieldTypes } from "@/types/types";
 import { z } from "zod";
 import SubmitButton from "../SubmitButton";
 import { useState } from "react";
-import UserFormValidation from "@/types/validation";
+import { UserFormValidation } from "@/types/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 const PatientForm = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -31,12 +31,14 @@ const PatientForm = () => {
             const userData = { name, email, phone };
 
             // Send data to the server
-            // const user = await createUser(userData);
+            const user = await createUser(userData);
 
             // Redirect to the next page
-            // if (user) router.push(`/patient/${user.$id}/register`);
+            if (user) router.push(`/patient/${user.$id}/register`);
         } catch (error) {
             console.error(error);
+        } finally {
+            // setIsLoading(false);
         }
     }
 
