@@ -25,7 +25,7 @@ const RenderField = ({ field, props }: RenderFieldProps) => {
     switch (fieldType) {
         case FormFieldTypes.INPUT:
             return (
-                <div className="flex rounded-md border border-dark-500 bg-dark-400">
+                <div className="flex rounded-md border border-dark-500 bg-dark-400 min-h-14 items-center">
                     {iconSrc && (
                         <Image
                             src={iconSrc}
@@ -46,7 +46,7 @@ const RenderField = ({ field, props }: RenderFieldProps) => {
             );
         case FormFieldTypes.PHONE_INPUT:
             return (
-                <div className="flex rounded-md border border-dark-500 bg-dark-400">
+                <div className="flex rounded-md border border-dark-500 bg-dark-400 min-h-14 items-center">
                     {iconSrc && (
                         <Image
                             src={iconSrc}
@@ -85,7 +85,7 @@ const CustomFormField = (props: CustomFormFieldProps) => {
                         <FormLabel>{label}</FormLabel>
                     )}
 
-                    <RenderField field={field} props={props} />
+                    <RenderField field={field} props={props}/>
 
                     <FormMessage className="shad-error" />
                 </FormItem>
