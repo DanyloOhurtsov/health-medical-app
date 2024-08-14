@@ -68,6 +68,10 @@
         @apply hidden h-full object-contain md:block;
     }
 
+    .side-register-img {
+        @apply hidden h-full object-contain md:block;
+    }
+
     .copyright {
         @apply text-14-regular justify-items-end text-center text-dark-600 xl:text-left;
     }
