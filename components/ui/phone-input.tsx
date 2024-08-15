@@ -116,7 +116,7 @@ const CountrySelect = ({
                     type="button"
                     variant={"outline"}
                     className={cn(
-                        "flex gap-1 rounded-e-none rounded-s-lg px-3 border-0"
+                        "flex gap-1 rounded-e-none rounded-s-lg px-1 border-0 ml-1"
                     )}
                     disabled={disabled}
                 >
@@ -129,9 +129,9 @@ const CountrySelect = ({
                     />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[300px] p-0 bg-dark-400 border-dark-500">
+            <PopoverContent className="w-[300px] p-0 bg-dark-400 border-dark-500 border rounded-md">
                 <Command>
-                    <CommandList>
+                    <CommandList className="border border-dark-400">
                         <ScrollArea className="h-72">
                             <CommandInput placeholder="Search country..." />
                             <CommandEmpty>No country found.</CommandEmpty>
