@@ -20,6 +20,7 @@ export enum FormFieldTypes {
     CHECKBOX = "checkbox",
     PHONE_INPUT = "phoneInput",
     DATE_PICKER = "datePicker",
+    GENDER = "gender",
 }
 
 export interface CustomFormFieldProps {
