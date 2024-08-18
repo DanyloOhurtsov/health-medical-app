@@ -8,7 +8,7 @@ export interface SearchParamsProps {
 }
 
 // ==== Main types
-declare type Gender = "Male" | "Female" | "Other";
+export type Gender ="male" | "female" | "other"
 declare type Status = "pending" | "scheduled" | "cancelled";
 
 // ==== Form Field
@@ -35,6 +35,7 @@ export interface CustomFormFieldProps {
     dateFormat?: string;
     showTimeSelect?: boolean;
     children?: React.ReactNode;
+    doctors?: { [key: string]: string };
     renderSkeleton?: (field: any) => React.ReactNode;
 }
 
@@ -85,7 +86,7 @@ export interface User extends CreateUserProps {
 }
 export interface RegisterUserProps {
     userId: string;
-    birthDate: string;
+    birthDate: Date;
     gender: Gender;
     address: string;
     occupation: string;
@@ -129,4 +130,10 @@ export interface UpdateAppointmentProps {
     userId: string;
     appointment: Appointment;
     type: string;
+}
+
+// File Upload
+export interface FileUploaderProps {
+    files: File[] | undefined;
+    onChange: (files: File[]) => void;
 }
