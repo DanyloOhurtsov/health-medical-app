@@ -29,6 +29,9 @@ import {
     SelectValue,
 } from "../ui/select";
 import { GenderOptions } from "@/lib/constants";
+import { Textarea } from "../ui/textarea";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
 
 const RenderField = ({ field, props }: RenderFieldProps) => {
     const {
@@ -133,27 +136,54 @@ const RenderField = ({ field, props }: RenderFieldProps) => {
                     </FormControl>
                 </div>
             );
-        case FormFieldTypes.SKELETON:
-            return renderSkeleton ? renderSkeleton(field) : null;
-        case FormFieldTypes.GENDER:
+        case FormFieldTypes.SELECT:
             return (
                 <div className="flex rounded-md border border-dark-500 bg-dark-400 min-h-14 items-center">
                     <FormControl>
-                        <Select>
-                            <SelectTrigger className="w-full focus:ring-0 focus:border-none focus:outline-none focus:ring-offset-0 ring-0 border-0 outline-none ring-offset-0">
-                                <SelectValue placeholder="---" className="text-dark-500"/>
-                            </SelectTrigger>
-                            <SelectContent className="bg-dark-400 border-dark-500 w-64 -ml-2.5">
-                                {GenderOptions.map((option) => (
-                                    <SelectItem value={option.id} className="cursor-pointer focus:bg-dark-500 transition-all rounded-md">
-                                        {option.label}
-                                    </SelectItem>
-                                ))}
+                        <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                        >
+                            <FormControl>
+                                <SelectTrigger className="shad-select-trigger">
+                                    <SelectValue placeholder={placeholder} />
+                                </SelectTrigger>
+                            </FormControl>
+                            <SelectContent className="shad-select-content">
+                                {props.children}
                             </SelectContent>
                         </Select>
                     </FormControl>
                 </div>
             );
+        case FormFieldTypes.TEXTAREA:
+            return (
+                <FormControl>
+                    <Textarea
+                        placeholder={placeholder}
+                        {...field}
+                        className="shad-textArea"
+                        disabled={props.disabled}
+                    />
+                </FormControl>
+            );
+        case FormFieldTypes.CHECKBOX:
+            return (
+                <FormControl>
+                    <div className="flex items-center gap-4">
+                        <Checkbox
+                            id={props.name}
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                        />
+                        <Label htmlFor={props.name} className="checkbox-label">
+                            {props.label}
+                        </Label>
+                    </div>
+                </FormControl>
+            );
+        case FormFieldTypes.SKELETON:
+            return renderSkeleton ? renderSkeleton(field) : null;
         default:
             break;
     }
