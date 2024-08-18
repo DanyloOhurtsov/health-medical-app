@@ -8,7 +8,7 @@ export interface SearchParamsProps {
 }
 
 // ==== Main types
-export type Gender ="male" | "female" | "other"
+export type Gender = "male" | "female" | "other";
 declare type Status = "pending" | "scheduled" | "cancelled";
 
 // ==== Form Field
@@ -136,4 +136,15 @@ export interface UpdateAppointmentProps {
 export interface FileUploaderProps {
     files: File[] | undefined;
     onChange: (files: File[]) => void;
+}
+
+// Header Props
+export interface HeaderProps {
+    title: string;
+    subtitle?: string;
+    className?: {
+        titleStyles: string;
+        subtitleStyles: string;
+        containerStyles: string;
+    };
 }

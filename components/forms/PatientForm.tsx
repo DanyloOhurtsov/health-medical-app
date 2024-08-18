@@ -1,16 +1,17 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
-import CustomFormField from "./CustomFormField";
-import { FormFieldTypes } from "@/types/types";
 import { z } from "zod";
-import SubmitButton from "../SubmitButton";
 import { useState } from "react";
-import { UserFormValidation } from "@/types/validation";
+import { useForm } from "react-hook-form";
+import SubmitButton from "../SubmitButton";
+import { Form } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
+import { FormFieldTypes } from "@/types/types";
+import CustomFormField from "./CustomFormField";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UserFormValidation } from "@/types/validation";
 import { createUser } from "@/lib/actions/patient.actions";
+import Header from "../Header";
 
 const PatientForm = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -47,12 +48,10 @@ const PatientForm = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6 flex-1"
             >
-                <section className="mb-20 space-y-4">
-                    <h1 className="header">Hi there!</h1>
-                    <p className="text-dark-700">
-                        Schedule your first appointment
-                    </p>
-                </section>
+                <Header
+                    title="Hi there!"
+                    subtitle="Schedule your first appointment"
+                />
 
                 <CustomFormField
                     fieldType={FormFieldTypes.INPUT}

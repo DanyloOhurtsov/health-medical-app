@@ -21,6 +21,7 @@ import { FormFieldTypes, User } from "@/types/types";
 import { registerPatient } from "@/lib/actions/patient.actions";
 import { PatientFormValidation } from "@/types/validation";
 import { Button } from "../ui/button";
+import Header from "../Header";
 
 const RegisterForm = ({ user }: { user: User }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -101,10 +102,10 @@ const RegisterForm = ({ user }: { user: User }) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6 flex-1"
             >
-                <section className="space-y-4">
-                    <h1 className="header">Welcome!</h1>
-                    <p className="text-dark-700">Let us know a bit about you</p>
-                </section>
+                <Header
+                    title="Welcome!"
+                    subtitle="Let us know a bit about you"
+                />
 
                 {/* Personal information */}
                 <section className="space-y-6 flex-1 pb-10">
