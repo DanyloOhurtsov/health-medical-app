@@ -13,11 +13,6 @@ export const FileUploader = ({ files, onChange }: FileUploaderProps) => {
 
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-    if (files && files?.length > 0) {
-        const fileTest = convertFileToUrl(files[0]);
-        console.log(fileTest);
-    }
-
     return (
         <div {...getRootProps()} className="file-upload">
             <input {...getInputProps()} />

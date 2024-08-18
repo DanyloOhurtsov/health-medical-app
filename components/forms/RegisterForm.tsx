@@ -38,7 +38,6 @@ const RegisterForm = ({ user }: { user: User }) => {
 
     const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
         setIsLoading(true);
-        console.log(values);
 
         // Store file info in form data as
         let formData;
@@ -95,8 +94,6 @@ const RegisterForm = ({ user }: { user: User }) => {
 
         setIsLoading(false);
     };
-
-    console.log(form.getValues().identificationDocument);
 
     return (
         <Form {...form}>
