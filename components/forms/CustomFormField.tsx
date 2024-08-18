@@ -32,6 +32,9 @@ import { GenderOptions } from "@/lib/constants";
 import { Textarea } from "../ui/textarea";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
+import { TimePickerInput } from "../ui/time-picker-input";
+import { useRef } from "react";
+import { Clock } from "lucide-react";
 
 const RenderField = ({ field, props }: RenderFieldProps) => {
     const {
@@ -43,6 +46,10 @@ const RenderField = ({ field, props }: RenderFieldProps) => {
         showTimeSelect,
         renderSkeleton,
     } = props;
+
+    const minuteRef = useRef<HTMLInputElement>(null);
+    const hourRef = useRef<HTMLInputElement>(null);
+    const secondRef = useRef<HTMLInputElement>(null);
 
     switch (fieldType) {
         case FormFieldTypes.INPUT:
@@ -131,6 +138,51 @@ const RenderField = ({ field, props }: RenderFieldProps) => {
                                     className="bg-dark-400 border-dark-500"
                                     classNames={{ root: "border-dark-500" }}
                                 />
+                                {showTimeSelect && (
+                                    <div className="flex items-end gap-2 bg-dark-400 rounded-md mt-2 p-3 border border-dark-500">
+                                        <div className="grid gap-1 text-center">
+                                            <Label
+                                                htmlFor="hours"
+                                                className="text-xs"
+                                            >
+                                                Hours
+                                            </Label>
+                                            <TimePickerInput
+                                                picker="hours"
+                                                date={field.value}
+                                                setDate={field.onChange}
+                                                ref={hourRef}
+                                                onRightFocus={() =>
+                                                    minuteRef.current?.focus()
+                                                }
+                                            />
+                                        </div>
+                                        <div className="grid gap-1 text-center">
+                                            <Label
+                                                htmlFor="minutes"
+                                                className="text-xs"
+                                            >
+                                                Minutes
+                                            </Label>
+                                            <TimePickerInput
+                                                picker="minutes"
+                                                date={field.value}
+                                                setDate={field.onChange}
+                                                ref={minuteRef}
+                                                onLeftFocus={() =>
+                                                    hourRef.current?.focus()
+                                                }
+                                                onRightFocus={() =>
+                                                    secondRef.current?.focus()
+                                                }
+                                            />
+                                        </div>
+
+                                        <div className="flex h-10 items-center">
+                                            <Clock className="ml-2 h-4 w-4" />
+                                        </div>
+                                    </div>
+                                )}
                             </PopoverContent>
                         </Popover>
                     </FormControl>
