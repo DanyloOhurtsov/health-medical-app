@@ -9,7 +9,7 @@ export interface SearchParamsProps {
 
 // ==== Main types
 export type Gender = "male" | "female" | "other";
-declare type Status = "pending" | "scheduled" | "cancelled";
+export type Status = "pending" | "scheduled" | "cancelled";
 
 // ==== Form Field
 export enum FormFieldTypes {
@@ -147,4 +147,11 @@ export interface HeaderProps {
         subtitleStyles: string;
         containerStyles: string;
     };
+}
+
+// Appointment Form Props
+export interface AppointmentFormProps {
+    type: "create" | "cancel" | "schedule";
+    userId: string;
+    patientId: string;
 }
