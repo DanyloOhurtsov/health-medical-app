@@ -155,3 +155,11 @@ export interface AppointmentFormProps {
     userId: string;
     patientId: string;
 }
+
+// Card Stat Props
+export interface CardStatProps {
+    type: "appointments" | "pending" | "cancelled";
+    count: number;
+    label: string;
+    icon: string;
+}
