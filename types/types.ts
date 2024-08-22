@@ -163,3 +163,16 @@ export interface CardStatProps {
     label: string;
     icon: string;
 }
+
+// DataTable Props
+export interface DataTableProps {
+    data: any[];
+    columns: any[];
+}
+
+// Status Badge Props
+export interface StatusBadgeProps {
+    status: Status;
+}
+
+// Status Icon
