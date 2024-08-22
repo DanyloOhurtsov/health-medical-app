@@ -6,6 +6,7 @@ import {
     DATABASE_ID,
     databases,
     ENDPOINT,
+    messaging,
 } from "../appwrite.config";
 import { parseStringify } from "../utils";
 import {
@@ -106,11 +107,29 @@ export const updateAppointment = async ({
             throw new Error("Failed to update appointment");
         }
 
-        // todo SMS Notification
+        const smsContent = `Your appointment has been ${type} successfully.`;
+
+        await sendSMSNotification(userId, smsContent);
+
         revalidatePath("/admin");
 
         return parseStringify(updatedAppointment);
     } catch (error) {
         console.log("updateAppointment", error);
+    }
+};
+
+export const sendSMSNotification = async (userId: string, content: string) => {
+    try {
+        const message = await messaging.createSms(
+            ID.unique(),
+            content,
+            [],
+            [userId]
+        );
+
+        return parseStringify(message);
+    } catch (error) {
+        console.log("sendSMSNotification", error);
     }
 };
