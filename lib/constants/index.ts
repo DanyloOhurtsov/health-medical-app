@@ -115,7 +115,7 @@ export const PatientFormDefaultValues = {
 };
 
 export const StatusIcon = {
-    scheduled: "/assets/icons/scheduled.svg",
+    scheduled: "/assets/icons/check.svg",
     pending: "/assets/icons/pending.svg",
     cancelled: "/assets/icons/cancelled.svg",
 };

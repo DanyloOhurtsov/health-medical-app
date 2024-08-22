@@ -130,6 +130,7 @@ const RenderField = ({ field, props }: RenderFieldProps) => {
                             <PopoverContent className="w-auto p-0">
                                 <Calendar
                                     mode="single"
+                                    captionLayout="dropdown"
                                     selected={field.value}
                                     onSelect={(date: any) =>
                                         field.onChange(date)

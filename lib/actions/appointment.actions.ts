@@ -8,7 +8,12 @@ import {
     ENDPOINT,
 } from "../appwrite.config";
 import { parseStringify } from "../utils";
-import { Appointment, CreateAppointmentProps } from "@/types/types";
+import {
+    Appointment,
+    CreateAppointmentProps,
+    UpdateAppointmentProps,
+} from "@/types/types";
+import { revalidatePath } from "next/cache";
 
 export const createAppointment = async (
     appointment: CreateAppointmentProps
@@ -75,8 +80,37 @@ export const getRecentAppointmentsList = async () => {
             documents: appointments.documents,
         };
 
+        revalidatePath("/admin");
+
         return parseStringify(data);
     } catch (error) {
         console.log("getRecentAppointmentsList", error);
+    }
+};
+
+export const updateAppointment = async ({
+    appointmentId,
+    userId,
+    appointment,
+    type,
+}: UpdateAppointmentProps) => {
+    try {
+        const updatedAppointment = await databases.updateDocument(
+            DATABASE_ID!,
+            APPOINTMENT_COLLECTION_ID!,
+            appointmentId,
+            appointment
+        );
+
+        if (!updatedAppointment) {
+            throw new Error("Failed to update appointment");
+        }
+
+        // todo SMS Notification
+        revalidatePath("/admin");
+
+        return parseStringify(updatedAppointment);
+    } catch (error) {
+        console.log("updateAppointment", error);
     }
 };

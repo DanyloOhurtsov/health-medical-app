@@ -1,10 +1,7 @@
 "use client";
 
 import { z } from "zod";
-import {
-    CreateAppointmentSchema,
-    getAppointmentSchema,
-} from "@/types/validation";
+import { getAppointmentSchema } from "@/types/validation";
 import Image from "next/image";
 import Header from "../Header";
 import { useState } from "react";
@@ -16,10 +13,19 @@ import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "./CustomFormField";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createAppointment } from "@/lib/actions/appointment.actions";
+import {
+    createAppointment,
+    updateAppointment,
+} from "@/lib/actions/appointment.actions";
 import { AppointmentFormProps, FormFieldTypes, Status } from "@/types/types";
 
-const AppointmentForm = ({ userId, patientId, type }: AppointmentFormProps) => {
+const AppointmentForm = ({
+    userId,
+    patientId,
+    type,
+    appointment,
+    setOpen,
+}: AppointmentFormProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
@@ -28,11 +34,13 @@ const AppointmentForm = ({ userId, patientId, type }: AppointmentFormProps) => {
     const form = useForm<z.infer<typeof AppointmentFormValidation>>({
         resolver: zodResolver(AppointmentFormValidation),
         defaultValues: {
-            primaryPhysician: "",
-            schedule: new Date(),
-            reason: "",
-            note: "",
-            cancellationReason: "",
+            primaryPhysician: appointment ? appointment.primaryPhysician : "",
+            schedule: appointment
+                ? new Date(appointment?.schedule)
+                : new Date(Date.now()),
+            reason: appointment ? appointment.reason : "",
+            note: appointment?.note || "",
+            cancellationReason: appointment?.cancellationReason || "",
         },
     });
 
@@ -72,9 +80,35 @@ const AppointmentForm = ({ userId, patientId, type }: AppointmentFormProps) => {
                         `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
                     );
                 }
+            } else {
+                const appointmentToUpdate = {
+                    userId,
+                    appointmentId: appointment?.$id!,
+                    appointment: {
+                        userId,
+                        primaryPhysician: values?.primaryPhysician,
+                        schedule: new Date(values?.schedule),
+                        status: status as Status,
+                        cancellationReason: values?.cancellationReason!,
+                    },
+                    type,
+                };
+
+                const updatedAppointment = await updateAppointment(
+                    // @ts-ignore
+                    appointmentToUpdate
+                );
+
+                if (updatedAppointment) {
+                    setOpen(false);
+                    form.reset();
+                }
             }
         } catch (error) {
             console.error(error);
+        } finally {
+            router.refresh();
+            setIsLoading(false);
         }
     }
 
@@ -100,10 +134,12 @@ const AppointmentForm = ({ userId, patientId, type }: AppointmentFormProps) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6 flex-1"
             >
-                <Header
-                    title="New Appointment"
-                    subtitle="Request a new appointment in 10 seconds."
-                />
+                {type === "create" && (
+                    <Header
+                        title="New Appointment"
+                        subtitle="Request a new appointment in 10 seconds."
+                    />
+                )}
                 {type !== "cancel" && (
                     <>
                         <CustomFormField
