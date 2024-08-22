@@ -106,7 +106,7 @@ export interface RegisterUserProps {
 }
 
 // == Appointment Actions
-export interface Appointment {
+export interface Appointment extends Models.Document {
     patient: Patient;
     schedule: Date;
     status: Status;
@@ -129,7 +129,7 @@ export interface UpdateAppointmentProps {
     appointmentId: string;
     userId: string;
     appointment: Appointment;
-    type: string;
+    type: "schedule" | "cancel" | "create";
 }
 
 // File Upload
@@ -154,4 +154,54 @@ export interface AppointmentFormProps {
     type: "create" | "cancel" | "schedule";
     userId: string;
     patientId: string;
+    appointment?: Appointment;
+    setOpen: (open: boolean) => void;
+}
+
+// Card Stat Props
+export interface CardStatProps {
+    type: "appointments" | "pending" | "cancelled";
+    count: number;
+    label: string;
+    icon: string;
+}
+
+// DataTable Props
+export interface DataTableProps {
+    data: any[];
+    columns: any[];
+}
+
+// Status Badge Props
+export interface StatusBadgeProps {
+    status: Status;
+}
+
+// Appointment Modal Props
+export interface AppointmentModalProps {
+    type: "schedule" | "cancel";
+    label: string;
+    patientId: string;
+    userId: string;
+    appointment?: Appointment;
+    title?: string;
+    description?: string;
+    classNames?: string;
+}
+
+// Update Appointment Props
+export interface UpdateAppointmentProps {
+    appointmentId: string;
+    userId: string;
+    appointment: Appointment;
+    type: "schedule" | "cancel" | "create";
+}
+
+// Appointments Data
+export interface AppointmentsDataProps {
+    appointments: {
+        scheduledCount: number;
+        pendingCount: number;
+        cancelledCount: number;
+    };
 }

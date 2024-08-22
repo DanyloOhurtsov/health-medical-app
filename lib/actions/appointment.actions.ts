@@ -1,14 +1,20 @@
 "use server";
 
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import {
     APPOINTMENT_COLLECTION_ID,
     DATABASE_ID,
     databases,
     ENDPOINT,
+    messaging,
 } from "../appwrite.config";
 import { parseStringify } from "../utils";
-import { CreateAppointmentProps } from "@/types/types";
+import {
+    Appointment,
+    CreateAppointmentProps,
+    UpdateAppointmentProps,
+} from "@/types/types";
+import { revalidatePath } from "next/cache";
 
 export const createAppointment = async (
     appointment: CreateAppointmentProps
@@ -23,7 +29,7 @@ export const createAppointment = async (
 
         return parseStringify(newAppointment);
     } catch (error) {
-        console.error(error);
+        console.log("createAppointment", error);
     }
 };
 
@@ -37,6 +43,93 @@ export const getAppointments = async (appointmentId: string) => {
 
         return parseStringify(appointment);
     } catch (error) {
-        console.error(error);
+        console.log("getAppointments", error);
+    }
+};
+
+export const getRecentAppointmentsList = async () => {
+    try {
+        const appointments = await databases.listDocuments(
+            DATABASE_ID!,
+            APPOINTMENT_COLLECTION_ID!,
+            [Query.orderDesc("$createdAt")]
+        );
+
+        const initialCounts = {
+            scheduledCount: 0,
+            pendingCount: 0,
+            cancelledCount: 0,
+        };
+
+        const counts = (
+            appointments.documents as unknown as Appointment[]
+        ).reduce((acc, appointment) => {
+            if (appointment.status === "scheduled") {
+                acc.scheduledCount += 1;
+            } else if (appointment.status === "pending") {
+                acc.pendingCount += 1;
+            } else if (appointment.status === "cancelled") {
+                acc.cancelledCount += 1;
+            }
+
+            return acc;
+        }, initialCounts);
+
+        const data = {
+            totalCount: appointments.total,
+            ...counts,
+            documents: appointments.documents,
+        };
+
+        revalidatePath("/admin");
+
+        return parseStringify(data);
+    } catch (error) {
+        console.log("getRecentAppointmentsList", error);
+    }
+};
+
+export const updateAppointment = async ({
+    appointmentId,
+    userId,
+    appointment,
+    type,
+}: UpdateAppointmentProps) => {
+    try {
+        const updatedAppointment = await databases.updateDocument(
+            DATABASE_ID!,
+            APPOINTMENT_COLLECTION_ID!,
+            appointmentId,
+            appointment
+        );
+
+        if (!updatedAppointment) {
+            throw new Error("Failed to update appointment");
+        }
+
+        const smsContent = `Your appointment has been ${type} successfully.`;
+
+        await sendSMSNotification(userId, smsContent);
+
+        revalidatePath("/admin");
+
+        return parseStringify(updatedAppointment);
+    } catch (error) {
+        console.log("updateAppointment", error);
+    }
+};
+
+export const sendSMSNotification = async (userId: string, content: string) => {
+    try {
+        const message = await messaging.createSms(
+            ID.unique(),
+            content,
+            [],
+            [userId]
+        );
+
+        return parseStringify(message);
+    } catch (error) {
+        console.log("sendSMSNotification", error);
     }
 };

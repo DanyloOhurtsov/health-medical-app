@@ -41,20 +41,6 @@ const TimePickerInput = React.forwardRef<
         const [flag, setFlag] = React.useState<boolean>(false);
         const [prevIntKey, setPrevIntKey] = React.useState<string>("0");
 
-        /**
-         * allow the user to enter the second digit within 2 seconds
-         * otherwise start again with entering first digit
-         */
-        React.useEffect(() => {
-            if (flag) {
-                const timer = setTimeout(() => {
-                    setFlag(false);
-                }, 2000);
-
-                return () => clearTimeout(timer);
-            }
-        }, [flag]);
-
         const calculatedValue = React.useMemo(() => {
             return getDateByType(date, picker);
         }, [date, picker]);
@@ -105,7 +91,7 @@ const TimePickerInput = React.forwardRef<
                 id={id || picker}
                 name={name || picker}
                 className={cn(
-                    "shad-input w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none bg-dark-400",
+                    "shad-input w-[48px] text-center font-mono text-base tabular-nums focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none bg-dark-400",
                     className
                 )}
                 value={value || calculatedValue}
