@@ -113,3 +113,9 @@ export const PatientFormDefaultValues = {
     disclosureConsent: false,
     privacyConsent: false,
 };
+
+export const StatusIcon = {
+    scheduled: "/assets/icons/scheduled.svg",
+    pending: "/assets/icons/pending.svg",
+    cancelled: "/assets/icons/cancelled.svg",
+};
