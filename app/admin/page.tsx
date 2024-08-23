@@ -33,7 +33,7 @@ const AdminPage = async () => {
 
                 <AppointmentsData appointments={appointments} />
 
-                <DataTable data={appointments.documents} columns={columns} />
+                <DataTable data={appointments?.documents} columns={columns} />
             </main>
         </div>
     );

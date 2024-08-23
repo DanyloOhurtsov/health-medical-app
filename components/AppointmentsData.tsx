@@ -3,25 +3,25 @@ import CardStat from "./CardStat";
 import { AppointmentsDataProps } from "@/types/types";
 
 const AppointmentsData = ({
-    appointments: { scheduledCount, pendingCount, cancelledCount },
+    appointments,
 }: AppointmentsDataProps) => {
     return (
         <section className="admin-stat">
             <CardStat
                 type="appointments"
-                count={scheduledCount}
+                count={appointments?.scheduledCount}
                 label="New Appointments"
                 icon="/assets/icons/appointments.svg"
             />
             <CardStat
                 type="pending"
-                count={pendingCount}
+                count={appointments?.pendingCount}
                 label="Pending Appointments"
                 icon="/assets/icons/pending.svg"
             />
             <CardStat
                 type="cancelled"
-                count={cancelledCount}
+                count={appointments?.cancelledCount}
                 label="Cancelled Appointments"
                 icon="/assets/icons/cancelled.svg"
             />
